@@ -1,7 +1,44 @@
+-- 自动保存主题选择：用 :colorscheme 切换主题后自动写入文件，下次重启保持
+local theme_file = vim.fn.stdpath("config") .. "/lua/config/theme.lua"
+local theme_group = vim.api.nvim_create_augroup("PersistTheme", { clear = true })
+
+-- 尝试从文件读取上次保存的主题
+local function load_persisted_theme()
+  local f = io.open(theme_file, "r")
+  if f then
+    local theme = f:read("*l")
+    f:close()
+    if theme and theme ~= "" then
+      return theme
+    end
+  end
+  return nil
+end
+
+-- 保存当前主题到文件
+local function persist_theme(theme_name)
+  local f = io.open(theme_file, "w")
+  if f then
+    f:write(theme_name)
+    f:close()
+  end
+end
+
+-- 监听 ColorScheme 事件，自动保存
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = theme_group,
+  callback = function(event)
+    persist_theme(event.match)
+  end,
+  desc = "Auto save colorscheme choice",
+})
+
 return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    lazy = true,
+    priority = 1000,
     opts = {
       flavour = "frappe",
       transparent_background = false,
@@ -33,6 +70,8 @@ return {
   },
   {
     "rebelot/kanagawa.nvim",
+    lazy = true,
+    priority = 1000,
     opts = {
       theme = "lotus",
     },
@@ -71,5 +110,12 @@ return {
     priority = 1000,
     opts = {},
   },
-  { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
+  -- 启动时加载上次保存的主题，没有则用 everforest
+  {
+    "LazyVim/LazyVim",
+    opts = function()
+      local persisted = load_persisted_theme()
+      return { colorscheme = persisted or "everforest" }
+    end,
+  },
 }
