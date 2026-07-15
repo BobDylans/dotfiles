@@ -20,6 +20,10 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
 vim.opt.undofile = true
 
+-- Normal 用 block，Insert 用竖条（便于区分模式）
+-- 注意：竖条可能与 fcitx5 预编辑区冲突，出现黑框
+vim.opt.guicursor = "n:block,i:ver25,r:block"
+
 -- 输入法预编辑区域高亮（中文输入时的拼音字母）
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
@@ -30,7 +34,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
--- Ctrl+S 只保存不格式化
-vim.keymap.set({"n", "i"}, "<C-s>", function()
-  vim.cmd("noautocmd write")
-end, { desc = "Save without format" })
+

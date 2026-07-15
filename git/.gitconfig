@@ -1,11 +1,9 @@
+[user]
+	name = BobDylans
+	email = 2603232854@qq.com
 [credential "https://github.com"]
 	helper = 
 	helper = !/home/ivan/.local/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/home/ivan/.local/bin/gh auth git-credential
-[user]
-	name = chengzihao
-	email = 2603232854@qq.com
-[credential "https://e.ennenergy.cn"]
-	helper = store

@@ -17,7 +17,7 @@ binds {
     // 临时开一个浮动终端
     Mod+Slash hotkey-overlay-title="临时终端 Quick Terminal" {spawn "kitty" "--single-instance" "--class" "quickterminal";}
     //打开浏览器
-    Mod+B hotkey-overlay-title="浏览器 Browser" { spawn "firefox"; }
+    Mod+B hotkey-overlay-title="浏览器 Browser" { spawn "firefox"; }        
     //opencode ai助手
     Mod+Alt+O hotkey-overlay-title="AI助手 opencode agent" { spawn "kitty" "--class" "opencode" "-e" "opencode"; }        
 
@@ -36,7 +36,7 @@ binds {
     // 随机下载壁纸
     Mod+Shift+F10 hotkey-overlay-title="随机下载壁纸 Random wallpaper" { spawn "~/.local/bin/random-anime-wallpaper-dms";}
 
-    Mod+O hotkey-overlay-title="切换总览界面 toggle overview" repeat=false { toggle-overview; }
+    Mod+O hotkey-overlay-title="打开终端 Open Ghostty" repeat=false { spawn "ghostty"; }
     Mod+G hotkey-overlay-title="切换总览界面 toggle overview" repeat=false { toggle-overview; }
     // 关闭聚焦窗口
     Mod+Q hotkey-overlay-title="关闭聚焦窗口 Close focus window" repeat=false { close-window; }
@@ -64,30 +64,30 @@ binds {
     // mod+鼠标中键 关闭窗口
     Mod+MouseMiddle  { close-window; }
 
-    // 切换聚焦（到边界自动跨显示器）
+    // 切换聚焦
     // super+方向键
-    Mod+Left hotkey-overlay-title=null { focus-column-or-monitor-left; }
-    Mod+Down  { focus-window-or-monitor-down; }
-    Mod+Up    { focus-window-or-monitor-up; }
-    Mod+Right { focus-column-or-monitor-right; }
+    Mod+Left hotkey-overlay-title=null { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
     // super+vim key
-    Mod+H     { focus-column-or-monitor-left; }
-    Mod+J     { focus-window-or-monitor-down; }
-    Mod+K     { focus-window-or-monitor-up; }
-    Mod+L     { focus-column-or-monitor-right; }
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-down; }
+    Mod+K     { focus-window-up; }
+    Mod+L     { focus-column-right; }
 
-    // 移动colume（列，到边界自动跨显示器）
+    // 移动colume（列）
     // super+ctrl+方向键
-    Mod+Ctrl+Left hotkey-overlay-title=null { move-column-left-or-to-monitor-left; }
-    Mod+Ctrl+Right hotkey-overlay-title=null { move-column-right-or-to-monitor-right; }
+    Mod+Ctrl+Left hotkey-overlay-title=null { move-column-left; }
+    Mod+Ctrl+Right hotkey-overlay-title=null { move-column-right; }
     // super+ctrl+vimkey
-    Mod+Ctrl+H     { move-column-left-or-to-monitor-left; }
+    Mod+Ctrl+H     { move-column-left; }
     Mod+Ctrl+J     { move-window-down; }
     Mod+Ctrl+K     { move-window-up; }
-    Mod+Ctrl+L     { move-column-right-or-to-monitor-right; }
+    Mod+Ctrl+L     { move-column-right; }
     // super+ctrl+a/d 向左/右移动列
-    Mod+Ctrl+A  { move-column-left-or-to-monitor-left; }
-    Mod+Ctrl+D { move-column-right-or-to-monitor-right; }
+    Mod+Ctrl+A  { move-column-left; }
+    Mod+Ctrl+D { move-column-right; }
     // mod+S/W 上下切换窗口
     Mod+S { move-window-down; }
     Mod+W { move-window-up; }

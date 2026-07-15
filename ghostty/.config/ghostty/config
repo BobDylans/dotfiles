@@ -1,56 +1,127 @@
-# 字体
-font-family = JetBrains Maple Mono
-font-size = 13
+# ═══════════════════════════════════════
+#  Ghostty 配置 — 基于 kitty 配置迁移 + 美化
+# ═══════════════════════════════════════
 
-# 内边距
-window-padding-x = 5
-window-padding-y = 5
-
-# 窗口装饰（隐藏标题栏）
-window-decoration = none
-
-# 透明度
+# -- 窗口 --
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+window-decoration = false
 background-opacity = 0.9
+background-opacity-cells = false
+background-blur = true
+confirm-close-surface = false
+window-theme = ghostty
+mouse-hide-while-typing = true
+focus-follows-mouse = true
+unfocused-split-opacity = 0.85
 
-# Shell
-command = fish
+# -- 字体 --
+font-family = JetBrains Maple Mono
+font-size = 13.5
+font-feature = calt
+font-feature = zero
+font-feature = ss01
+font-feature = ss02
+font-synthetic-style = false
+font-thicken = true
 
-# 光标
+# -- Shell --
+shell-integration = detect
+shell-integration-features = no-cursor
+
+# -- 光标 --
 cursor-style = bar
 cursor-style-blink = true
 
-# 关闭时不确认
-confirm-close-surface = false
+# -- 滚动 --
+scrollback-limit = 100000
+mouse-scroll-multiplier = 3
+progress-style = true
+async-backend = auto
 
-# 关闭窗口大小提示
-resize-overlay = never
+# -- 通知与提示 --
+notify-on-command-finish = always
+notify-on-command-finish-after = 5s
+app-notifications = clipboard-copy,config-reload
+desktop-notifications = true
+bell-features = no-system,no-audio,attention,title,no-border
+faint-opacity = 0.6
 
-# Tab 切换（与 kitty 一致）
+# -- GTK --
+gtk-titlebar = false
+gtk-tabs-location = top
+gtk-wide-tabs = true
+gtk-titlebar-style = native
+linux-cgroup = single-instance
+
+# -- 主题（迁移自 kitty dank-theme） --
+foreground = #e2e2e6
+background = #111416
+cursor-color = #e2e2e6
+cursor-text = #c2c7cf
+selection-foreground = #223241
+selection-background = #b8c8dc
+minimum-contrast = 1.1
+bold-color = #eff7ff
+
+palette = 0=#111416
+palette = 1=#ff729c
+palette = 2=#7cf88c
+palette = 3=#fff772
+palette = 4=#86b8eb
+palette = 5=#274c72
+palette = 6=#9fcbf8
+palette = 7=#eff7ff
+palette = 8=#959ba1
+palette = 9=#ff9fbb
+palette = 10=#a5ffb1
+palette = 11=#fffaa5
+palette = 12=#b1d7ff
+palette = 13=#bedeff
+palette = 14=#d5eaff
+palette = 15=#f8fbff
+
+# -- 快捷键 --
+# Alt+左右切换标签
 keybind = alt+left=previous_tab
 keybind = alt+right=next_tab
-
-# 配色（来自 kitty dank-theme）
-background = #141218
-foreground = #e6e0e9
-cursor-color = #e6e0e9
-cursor-text = #cac4cf
-selection-background = #ccc2dc
-selection-foreground = #381e72
-
-# 16 色 ANSI
-palette = 0=#141218
-palette = 1=#ff728f
-palette = 2=#7fff9a
-palette = 3=#ffda72
-palette = 4=#bca5f2
-palette = 5=#4e3d76
-palette = 6=#D0BCFF
-palette = 7=#f4efff
-palette = 8=#9d99a5
-palette = 9=#ff9fb2
-palette = 10=#a5ffb8
-palette = 11=#ffe7a5
-palette = 12=#d7c6ff
-palette = 13=#ded0ff
-palette = 14=#e9e0ff
-palette = 15=#faf8ff
+# Alt+数字切标签
+keybind = alt+1=goto_tab:1
+keybind = alt+2=goto_tab:2
+keybind = alt+3=goto_tab:3
+keybind = alt+4=goto_tab:4
+keybind = alt+5=goto_tab:5
+keybind = alt+6=goto_tab:6
+keybind = alt+7=goto_tab:7
+keybind = alt+8=goto_tab:8
+keybind = alt+9=last_tab
+# 新开/关闭标签
+keybind = ctrl+t=new_tab
+keybind = ctrl+w=close_tab
+# 分屏
+keybind = ctrl+shift+left=new_split:right
+keybind = ctrl+shift+right=new_split:right
+keybind = ctrl+shift+down=new_split:down
+keybind = ctrl+shift+up=new_split:down
+# 分屏导航
+keybind = ctrl+alt+left=goto_split:left
+keybind = ctrl+alt+right=goto_split:right
+keybind = ctrl+alt+up=goto_split:up
+keybind = ctrl+alt+down=goto_split:down
+# 分屏缩放（全屏当前分屏）
+keybind = ctrl+shift+z=toggle_split_zoom
+# 复制/粘贴
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+# 字体大小
+keybind = ctrl+equal=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+zero=reset_font_size
+# 搜索
+keybind = ctrl+shift+f=start_search
+# 全屏/最大化
+keybind = super+enter=toggle_fullscreen
+keybind = super+m=toggle_maximize
+# 命令面板
+keybind = ctrl+shift+p=toggle_command_palette

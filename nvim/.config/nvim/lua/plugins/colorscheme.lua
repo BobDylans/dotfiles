@@ -24,13 +24,34 @@ local function persist_theme(theme_name)
   end
 end
 
--- 监听 ColorScheme 事件，自动保存
+-- nvim 主题名 → kitty 主题名（kitty +kitten themes 格式）
+local kitty_theme_map = {
+  ["kanagawa"] = "Kanagawa_dragon",
+  ["kanagawa-dragon"] = "Kanagawa_dragon",
+  ["catppuccin"] = "Catppuccin_Mocha",
+  ["catppuccin-frappe"] = "Catppuccin_Frappe",
+  ["everforest"] = "Everforest_Dark_Hard",
+  ["onedark"] = "One_Dark",
+  ["dracula"] = "Dracula",
+  ["cyberdream"] = "Cyberdream",
+}
+
+-- 同步 kitty 主题
+local function sync_kitty_theme(nvim_theme)
+  local kitty_theme = kitty_theme_map[nvim_theme]
+  if not kitty_theme then return end
+  -- 用 kitty +kitten themes 切换，会自动下载主题并重载所有 kitty 窗口
+  vim.system({ "kitty", "+kitten", "themes", "--reload-in=all", kitty_theme }, { timeout = 5000 })
+end
+
+-- 监听 ColorScheme 事件，自动保存 + 同步 kitty
 vim.api.nvim_create_autocmd("ColorScheme", {
   group = theme_group,
   callback = function(event)
     persist_theme(event.match)
+    sync_kitty_theme(event.match)
   end,
-  desc = "Auto save colorscheme choice",
+  desc = "Auto save colorscheme choice and sync kitty theme",
 })
 
 return {

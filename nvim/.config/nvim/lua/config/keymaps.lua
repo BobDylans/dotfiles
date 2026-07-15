@@ -11,6 +11,11 @@ end, { desc = "Colorscheme Picker" })
 vim.keymap.set("n", "<C-A-Left>", "<C-o>", { desc = "Jump backward" })
 vim.keymap.set("n", "<C-A-Right>", "<C-i>", { desc = "Jump forward" })
 
+-- Ctrl+S 只保存不格式化（覆盖 LazyVim 默认的 :w，跳过格式化和 autocmd）
+vim.keymap.set({"n", "i"}, "<C-s>", function()
+  vim.cmd("noautocmd write")
+end, { desc = "Save without format" })
+
 -- Ctrl+方向键 替代 Ctrl+hjkl 窗口跳转
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = "Go to left window" })
 vim.keymap.set("n", "<C-Down>", "<C-w>j", { desc = "Go to down window" })
