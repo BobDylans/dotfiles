@@ -7,6 +7,10 @@
   "fixedEditor": {
     "enabled": true,
     "mouseScroll": true,
-    "copyNotice": true
+    "copyNotice": false
+  },
+  "footerSegments": {
+    "tokens": false,
+    "cost": false
   }
 }
