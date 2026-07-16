@@ -3,5 +3,10 @@
     "starship": "terminal",
     "editor": "theme",
     "userMessages": "theme"
+  },
+  "fixedEditor": {
+    "enabled": true,
+    "mouseScroll": true,
+    "copyNotice": true
   }
 }
