@@ -11,6 +11,7 @@
   },
   "footerSegments": {
     "tokens": false,
-    "cost": false
+    "cost": false,
+    "runtime": false
   }
 }
