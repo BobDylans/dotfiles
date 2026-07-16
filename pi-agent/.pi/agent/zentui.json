@@ -5,7 +5,7 @@
     "userMessages": "theme"
   },
   "fixedEditor": {
-    "enabled": true,
+    "enabled": false,
     "mouseScroll": true,
     "copyNotice": false
   },
