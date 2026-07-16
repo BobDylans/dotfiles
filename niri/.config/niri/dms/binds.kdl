@@ -237,9 +237,9 @@ binds {
     // 记事本
     Mod+Shift+N hotkey-overlay-title="记事本 Notepad" { spawn "dms" "ipc" "call" "notepad" "toggle"; }
     // 锁屏
-    Mod+Alt+L hotkey-overlay-title="锁屏 Lock Screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Mod+Alt+L hotkey-overlay-title="锁屏 Lock Screen" { spawn "swaylock"; }
     // 锁屏、关闭显示器、休眠
-    Mod+Alt+P hotkey-overlay-title="挂起 Suspend" { spawn-sh "niri msg action power-off-monitors && dms ipc call lock lock && systemctl suspend";}
+    Mod+Alt+P hotkey-overlay-title="挂起 Suspend" { spawn-sh "swaylock -f && niri msg action power-off-monitors && systemctl suspend";}
     // Ctrl+Alt+Del 呼出任务管理器
     Ctrl+Alt+Delete hotkey-overlay-title="任务管理器 Task Manager" { spawn "dms" "ipc" "call" "processlist" "focusOrToggle"; }
     // 创建窗口规则 (Mod+Shift+W)
