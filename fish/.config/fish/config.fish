@@ -3,6 +3,10 @@ if status is-interactive
 end
 set fish_greeting ""
 set -p PATH ~/.local/bin
+
+# GitHub MCP server (github plugin) token from gh CLI login
+set -gx GITHUB_PAT_TOKEN (gh auth token 2>/dev/null)
+
 oh-my-posh init fish --config /usr/share/oh-my-posh/themes/the-unnamed.omp.json | source
 zoxide init fish --cmd cd | source
 # 111
@@ -58,7 +62,7 @@ function proxyOn
     set -gx HTTP_PROXY http://127.0.0.1:7890
     set -gx HTTPS_PROXY http://127.0.0.1:7890
     set -gx ALL_PROXY http://127.0.0.1:7890
-    set -gx NO_PROXY localhost,127.0.0.1,fastai.enncloud.cn
+    set -gx NO_PROXY localhost,127.0.0.1,fastai.enncloud.cn,cnvpn.enn.cn
     echo "✅ 代理已开启 (7890)"
 end
 
@@ -106,25 +110,45 @@ function workVpnOn
         return 1
     end
 
-    # 先试一下 DNS 是否可解析
-    if not command -q host
-        echo "⚠️  未安装 host 命令，跳过 DNS 检查"
-    else if not host cnvpn.enn.cn >/dev/null 2>&1
-        echo "❌ DNS 无法解析 cnvpn.enn.cn"
-        echo "   试试用 ping 手动检查：ping -c 2 cnvpn.enn.cn"
-        return 1
-    end
+    # 保存当前代理状态，临时清除（VPN 需要直连，不能走 Clash 代理）
+    set -l saved_http "$HTTP_PROXY"
+    set -l saved_https "$HTTPS_PROXY"
+    set -e HTTP_PROXY
+    set -e HTTPS_PROXY
+    # 确保 VPN 域名不走代理
+    set -gx NO_PROXY "$NO_PROXY,cnvpn.enn.cn"
 
-    # 连接 VPN（前台运行，ldap-sms 会提示输入短信验证码）
-    echo "📱 请输入短信验证码（如果提示）："
-    LD_LIBRARY_PATH=/opt/MotionPro /opt/MotionPro/vpn_cmdline \
+    # 连接 VPN（ldap-sms 会提示输入短信验证码）
+    # 前端提示语
+    echo "📱 请输入短信验证码："
+    # 用 timeout 限制 vpn_cmdline 的总运行时间，避免卡在 status 轮询
+    # 30 秒足够输入验证码 + 建立 VPN 隧道
+    set -l vpn_timeout 45
+    timeout $vpn_timeout env -u HTTP_PROXY -u HTTPS_PROXY \
+        LD_LIBRARY_PATH=/opt/MotionPro /opt/MotionPro/vpn_cmdline \
         -h cnvpn.enn.cn \
         -u chengzihao \
         -p "$vpn_pass" \
         -m ldap-sms
+    set -l vpn_result $status
+
+    # timeout 返回码 124 = 超时
+    if test $vpn_result -eq 124
+        echo ""
+        echo "⏱️  VPN 登录成功，隧道建立中（后台已连上，返回终端）"
+        set vpn_result 0
+    end
+
+    # 恢复代理状态
+    if test -n "$saved_http"
+        set -gx HTTP_PROXY "$saved_http"
+    end
+    if test -n "$saved_https"
+        set -gx HTTPS_PROXY "$saved_https"
+    end
 
     # 根据返回码判断
-    if test $status -eq 0
+    if test $vpn_result -eq 0
         echo "✅ Work VPN 已开启"
         return 0
     else
@@ -175,6 +199,11 @@ function vpnReset
     echo "✅ 网络已重置，可以重新连接"
 end
 
+# Steam 启动时自动走 7890 代理 + 修复中文输入法
+function steam
+    env HTTP_PROXY=http://127.0.0.1:7890 HTTPS_PROXY=http://127.0.0.1:7890 NO_PROXY=localhost,127.0.0.1 GTK_IM_MODULE=xim XMODIFIERS=@im=fcitx /usr/bin/steam $argv
+end
+
 # opencode
 fish_add_path /home/ivan/.opencode/bin
 
@@ -183,3 +212,14 @@ fish_add_path ~/.cargo/bin
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# Added by jcode installer
+if not contains "/home/ivan/.local/bin" $PATH
+    set -gx PATH "/home/ivan/.local/bin" $PATH
+end
+
+# 开新终端窗口时自动执行 fastfetch
+if status --is-interactive && not set -q FASTFETCH_DONE
+    set -gx FASTFETCH_DONE 1
+    fastfetch
+end

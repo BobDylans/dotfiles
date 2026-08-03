@@ -100,6 +100,19 @@ spawn-at-startup "systemctl" "--user" "start" "linuxqq-clipsync"
 // 自动熄屏锁屏睡眠 swayidle
 spawn-at-startup "~/.config/niri/scripts/swayidle.sh"
 
+// === 组件守护进程 ===
+// nirius: focus/focus-or-spawn/toggle-follow-mode/scratchpad 等窗口增强命令
+// 必须启动 niriusd 守护进程,nirius 命令才能工作
+spawn-at-startup "niriusd"
+// niri-float-sticky: 让浮动窗口跨工作区钉住 (Firefox PiP / imv / copyq / waypaper / clipse-gui)
+// 白名单模式,只对列出的 app 生效,不影响其它浮动窗口
+// Firefox PiP 用 -title 精确匹配,避免 firefox 主窗口也被钉住
+spawn-at-startup "niri-float-sticky" "-app-id" "^imv$" "-app-id" "^com.github.hluk.copyq$" "-app-id" "^waypaper$" "-app-id" "^clipse-gui$" "-app-id" "^firefox$" "-title" "Picture-in-Picture"
+
+// niri-scratchpad-rs 需要一个名为 stash 的工作区来收容被隐藏的 scratchpad 窗口
+// 不加这行,niri-scratchpad 命令会报错
+workspace "stash" { }
+
 // 取消启动niri时自动开启快捷键教程
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -169,6 +182,9 @@ include "dms/cursor.kdl"
 include "dms/outputs.kdl"
 include "dms/colors.kdl"
 
-// 取消下面这行的注释启动shorin预先准备好的blur配置
-//include "blur.kdl"
+// 启动shorin预先准备好的blur配置
+// DMS 已全局 draw-border-with-background false + geometry-corner-radius 18,
+// blur 配合 xray 模式零性能消耗即可生效到所有窗口
+include "blur.kdl"
 
+include "dms/layout.kdl"

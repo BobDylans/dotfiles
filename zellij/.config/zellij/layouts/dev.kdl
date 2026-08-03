@@ -7,8 +7,9 @@ layout {
     pane size="65%" focus=true
 
     // 右侧上下两个小 pane
-    pane size="35%" split_direction="horizontal" {
-        pane name="terminal"
-        pane name="monitor" command="btop"
+    // split_direction="vertical" => 上下堆叠（zellij 语义：沿垂直方向切分）
+    pane size="35%" split_direction="vertical" borderless=true {
+        pane size="60%" name="terminal"
+        pane size="40%" name="monitor" command="btop"
     }
 }

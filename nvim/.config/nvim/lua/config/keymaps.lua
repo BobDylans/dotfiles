@@ -16,6 +16,15 @@ vim.keymap.set({"n", "i"}, "<C-s>", function()
   vim.cmd("noautocmd write")
 end, { desc = "Save without format" })
 
+-- Ctrl+A 全选（gg + V + G）
+vim.keymap.set({"n", "x", "i"}, "<C-a>", function()
+  if vim.fn.mode() == "i" then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>ggVG", true, false, true), "n", false)
+  else
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("ggVG", true, false, true), "n", false)
+  end
+end, { desc = "Select all" })
+
 -- Ctrl+方向键 替代 Ctrl+hjkl 窗口跳转
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = "Go to left window" })
 vim.keymap.set("n", "<C-Down>", "<C-w>j", { desc = "Go to down window" })

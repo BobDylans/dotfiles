@@ -14,7 +14,7 @@ return {
       opts.completion.list = opts.completion.list or {}
       -- preselect=false: 补全菜单弹出时不自动选中第一项
       -- 这样默认"选中"的就是你正在输入的内容,回车直接用自己的
-      opts.completion.list.selection = { preselect = false, auto_insert = false }
+      opts.completion.list.selection = { preselect = true, auto_insert = false }
     end,
   },
 }

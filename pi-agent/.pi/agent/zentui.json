@@ -1,6 +1,6 @@
 {
   "colorSources": {
-    "starship": "terminal",
+    "starship": "theme",
     "editor": "theme",
     "userMessages": "theme"
   },
@@ -10,8 +10,35 @@
     "copyNotice": false
   },
   "footerSegments": {
-    "tokens": false,
+    "tokens": true,
     "cost": false,
-    "runtime": false
-  }
+    "runtime": false,
+    "os": true,
+    "username": false,
+    "time": true,
+    "context": true,
+    "packageVersion": false,
+    "gitCommit": false,
+    "cwd": true,
+    "sessionName": true,
+    "sessionDuration": false
+  },
+  "features": {
+    "copyFriendly": false
+  },
+  "contextStyle": "text+gauge",
+  "extensionStatuses": {
+    "placements": {
+      "pi-cache-stats": "right",
+      "pi-ketch": "off",
+      "pi-speeed": "off"
+    },
+    "colorModes": {
+      "pi-cache-stats": "zentui",
+      "pi-ketch": "zentui",
+      "pi-speeed": "zentui"
+    }
+  },
+  "separator": "dot",
+  "editorModelLabel": "id"
 }

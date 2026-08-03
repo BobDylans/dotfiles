@@ -14,8 +14,10 @@ binds {
     Mod+F5 hotkey-overlay-title="快速存档 Quick save" {spawn "quicksave";}
     Mod+F8 hotkey-overlay-title="快速读档 Quick load" {spawn "quickload";}
 
-    // 临时开一个浮动终端
-    Mod+Slash hotkey-overlay-title="临时终端 Quick Terminal" {spawn "kitty" "--single-instance" "--class" "quickterminal";}
+    // 临时开一个浮动终端 (真 scratchpad,跨工作区跟随)
+    // niri-scratchpad target appid <X>: 开着就隐藏,没开就 --spawn 启动
+    // 收容到 stash 工作区,需要 workspace "stash" {} (已加到 config.kdl)
+    Mod+Slash hotkey-overlay-title="临时终端 Quick Terminal" {spawn "niri-scratchpad" "target" "--spawn" "kitty --class quickterminal" "appid" "quickterminal";}
     //打开浏览器
     Mod+B hotkey-overlay-title="浏览器 Browser" { spawn "firefox"; }        
     //opencode ai助手
@@ -55,10 +57,15 @@ binds {
     // 例如 ctrl+c居中。此时按下此键可以重新排列）
     Mod+Alt+R hotkey-overlay-title="重置侧边栏 Reorder Sidebar"  { spawn "niri-sidebar" "reorder"; }
 
-    // 以下功能需要安装nirius并启动niriusd
-    //Mod+Ctrl+G hotkey-overlay-title="在切换工作区时自动跟随 Follow when switch workspaces" {spawn "nirius" "toggle-follow-mode" ;}
-    //Mod+Shift+Q hotkey-overlay-title="快速聚焦到QQ Quick focus QQ" {spawn "nirius" "focus" "--app-id" "QQ" ;}
-    //Mod+Shift+W hotkey-overlay-title="快速聚焦到微信 Quick focus Wechat" {spawn "nirius" "focus" "--app-id" "wechat" ;}
+    // === nirius 集成 (需要 spawn-at-startup "niriusd",已在 config.kdl 配置) ===
+    // 切换工作区时,被标记为 follow 模式的窗口会跟随到当前工作区
+    // 典型用途:QQ/微信置为 follow 后,切工作区它们跟过来,而不是消失
+    Mod+Ctrl+G hotkey-overlay-title="切换跟随模式 Toggle follow mode" {spawn "nirius" "toggle-follow-mode" ;}
+    // 快速聚焦到 QQ (多实例则循环切换)
+    Mod+Shift+Q hotkey-overlay-title="快速聚焦到QQ Quick focus QQ" {spawn "nirius" "focus" "--app-id" "QQ" ;}
+    // 微信用 Mod+Alt+Q:Mod+Shift+W 被 DMS window-rules 占用,Mod+Alt+W 被 DMS 壁纸切换占用
+    // Q+Alt 和 QQ 的 Q+Shift 形成语义对称,好记
+    Mod+Alt+Q hotkey-overlay-title="快速聚焦到微信 Quick focus Wechat" {spawn "nirius" "focus" "--app-id" "wechat" ;}
 
     
     // mod+鼠标中键 关闭窗口

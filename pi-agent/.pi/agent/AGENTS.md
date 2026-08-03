@@ -25,6 +25,7 @@
 | 容器 | podman | — |
 | 模糊搜索 | fzf（管道组合用） | — |
 | 流编辑 | sed | awk（结构化文本） |
+| OCR 文字识别 | RapidOCR | Tesseract（备用，中文乱码多） |
 | 其他 | tldr、curl、ssh、gpg、wl-paste/copy、brightnessctl、mangohud、fastfetch | — |
 
 ## 🐟 fish 别名
@@ -55,9 +56,16 @@ PATH 含 ~/.bun/bin, ~/.cargo/bin, ~/.opencode/bin, ~/.local/bin
 7. **磁盘**: ncdu → du -sh
 8. **进程监控**: btop → htop → top
 9. **包管理**: yay → paru → pacman
-10. **网络搜索**: ketch（走本地 SearXNG）→ web_search → curl
-    - `ketch_search` — 网页搜索
+10. **网络搜索**: ketch（走本地 SearXNG）→ rpiv-web-tools（serper）→ curl
+    - `ketch_search` — 网页搜索（SearXNG，本地隐私优先）
     - `ketch_scrape` — 抓取网页
     - `ketch_code` — 搜开源代码
     - `ketch_docs` — 库文档
-    - 只有 ketch 不可用时才回退到 web_search
+    - `web_search` — rpiv-web-tools（默认 serper，配置在 ~/.config/rpiv-web-tools/config.json，可用 /web-tools 切换）
+    - `web_fetch` — 抓取页面（无需 key）
+    - 优先级：ketch 不可用时才回退到 web_search/web_fetch
+11. **OCR 文字识别**: RapidOCR → Tesseract
+    - **首选 RapidOCR**（基于 PaddleOCR，中文准确率高）
+    - 用法：`/home/ivan/.local/share/pipx/venvs/rapidocr/bin/python3 -c "from rapidocr import RapidOCR; ocr=RapidOCR(); [print(t) for t in ocr('图片.png').txts]"`
+    - 命令行：`rapidocr -img 图片.png -word`（输出含数组，不如 Python 调用干净）
+    - Tesseract 备用：`tesseract 图片.png stdout -l chi_sim+eng`（中文乱码多，不推荐）

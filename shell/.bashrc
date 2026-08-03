@@ -17,3 +17,6 @@ export http_proxy=http://127.0.0.1:7897
 
 
 source /home/ivan/.config/broot/launcher/bash/br
+
+# Added by jcode installer
+export PATH="/home/ivan/.local/bin:$PATH"

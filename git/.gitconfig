@@ -7,3 +7,13 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/home/ivan/.local/bin/gh auth git-credential
+[pull]
+	rebase = true
+[http]
+	proxy = http://127.0.0.1:7890
+[https]
+	proxy = http://127.0.0.1:7890
+[credential "https://e.ennenergy.cn"]
+	helper = store
+[http "https://e.ennenergy.cn"]
+	proxy = 

@@ -30,5 +30,20 @@ layer-rule {
 	blur true
     }
 }
+// kitty 专属规则:不参与 blur,保持透明背景直接显示桌面
+// 放在全局规则之后,更具体的规则覆盖更宽泛的(后匹配优先)
+window-rule {
+    match app-id="^kitty$"
+    background-effect {
+        blur false
+    }
+}
+// ghostty 专属规则:同 kitty,不参与 blur,透明背景直显桌面
+window-rule {
+    match app-id=r#"^com\.mitchellh\.ghostty$"#
+    background-effect {
+        blur false
+    }
+}
 // --- NIRI BLUR END ---
 
