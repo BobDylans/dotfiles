@@ -4,7 +4,7 @@
 // ! PLACE YOUR CUSTOM CONFIGURATION ELSEWHERE !
 
 cursor {
-    xcursor-theme "Breeze_Light"
+    xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 28
     hide-when-typing
 }

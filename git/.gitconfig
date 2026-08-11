@@ -1,6 +1,6 @@
 [user]
-	name = BobDylans
-	email = 2603232854@qq.com
+	name = chengzihao
+	email = chengzihao@enn.cn
 [credential "https://github.com"]
 	helper = 
 	helper = !/home/ivan/.local/bin/gh auth git-credential
@@ -17,3 +17,40 @@
 	helper = store
 [http "https://e.ennenergy.cn"]
 	proxy = 
+[core]
+	pager = delta
+[delta]
+	syntax-theme = Dracula
+	navigate = true
+	line-numbers = true
+	line-numbers-left-format = "{nm:>4}⋮"
+	line-numbers-right-format = "{nm:>4}│"
+	line-numbers-left-style = cyan
+	line-numbers-right-style = cyan
+	side-by-side = true
+	width-for-diff-equal = 1
+	file-style = bold yellow ul
+	hunk-header-style = file line-number
+	file-decoration-style = blue box
+	hunk-header-decoration-style = blue box
+	keep-plus-minus-markers = true
+	zero-style = dim
+	blame-format = "{author:^15} {commit:>7} {commit-time}"
+	blame-code-style = blue
+	hyperlinks = true
+	hyperlinks-file-link-format = file://{path}:{line}
+	diff-highlight = true
+[interactive]
+	diffFilter = delta --color-only
+[diff]
+	colorMoved = default
+	colorMovedWs = allow-indentation-change
+[merge]
+	conflictstyle = zdiff3
+[blame]
+	dateRe = local
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

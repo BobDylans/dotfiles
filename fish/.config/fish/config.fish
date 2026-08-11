@@ -223,3 +223,14 @@ if status --is-interactive && not set -q FASTFETCH_DONE
     set -gx FASTFETCH_DONE 1
     fastfetch
 end
+
+# archlinux-java 别名
+alias archJava='archlinux-java'
+
+# ─── nvim 双配置切换 ───
+# nvim        → LazyVim（默认，日常使用）
+# nvim-mini   → 精简版（快速编辑/服务器）
+alias nvim-mini 'NVIM_APPNAME=nvim-mini nvim'
+
+# ─── fff 禁用 home 目录索引（避免大目录扫描消耗资源）───
+set -gx FFF_ENABLE_HOME_SCAN 0

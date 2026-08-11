@@ -1,4 +1,4 @@
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never --line-numbers --side-by-side
+      command: delta --no-gitconfig --dark --paging=never --line-numbers --file-decoration-style=plain --hunk-header-decoration-style=plain --syntax-theme="Monokai Extended Bright" --minus-style='syntax "#8b0000"' --plus-style='syntax "#006400"'
