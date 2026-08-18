@@ -130,3 +130,8 @@ __pycache__/
 /wlogout/
 /session/
 /xdg/
+
+# == 第三方/自动生成（留本地不进 git）==
+/kitty/.config/kitty/kitty_grab/
+/broot/.config/broot/skins/
+/pi-agent/.pi/agent/npm/package-lock.json
