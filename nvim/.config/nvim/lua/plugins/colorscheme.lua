@@ -123,6 +123,7 @@ return {
     priority = 1000,
     opts = {
       style = "dark",
+      transparent = true, -- 背景透明：不画 Normal 背景色，透出终端(kitty 0.85)透明效果
     },
   },
   {

@@ -1,7 +1,0 @@
-[Unit]
-Description=Remind to run system cache cleanup
-
-[Service]
-Type=oneshot
-ExecStart=notify-send -u normal -i "system-software-update" "Weekly Cleanup" "Run: sudo ~/.local/bin/system-cleanup.sh"
-Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus

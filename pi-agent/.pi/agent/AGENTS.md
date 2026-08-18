@@ -21,6 +21,7 @@
 | 资源监控     | btop                                                                    | htop（进程管理）                        |
 | 磁盘分析     | ncdu                                                                    | —                                       |
 | 包管理       | yay                                                                     | paru / pacman（备用）                   |
+| 技术文档检索 | context7 MCP（`mcp_context7_query_docs`）                               | ketch_docs（备用）                      |
 | 文本编辑     | nvim                                                                    | vim / code / nano                       |
 | JS/TS 运行时 | bun（~/.bun/bin/bun）                                                   | node / deno                             |
 | 文件管理     | yazi                                                                    | —                                       |
@@ -62,7 +63,12 @@ PATH 含 ~/.bun/bin, ~/.cargo/bin, ~/.opencode/bin, ~/.local/bin
 7. **磁盘**: ncdu → du -sh
 8. **进程监控**: btop → htop → top
 9. **包管理**: yay → paru → pacman
-10. **网络搜索**: ketch（走本地 SearXNG）→ rpiv-web-tools（serper）→ curl
+10. **技术文档检索**: context7 MCP（首选）→ ketch_docs → web_search
+    - `mcp_context7_resolve_library_id` — 解析库 ID（格式 /org/project）
+    - `mcp_context7_query_docs` — 查询库官方文档与代码示例（独立 MCP，streamable-http → https://mcp.context7.com/mcp，由 pi-mcp-extension 加载）
+    - 查任何库/框架的 API 文档时优先用它，ketch_docs 不可用或需要全文时才备用
+    - 开源实现对照用 ketch_code / ketch_scrape（如抓 guide-rpc-framework 源码）
+11. **网络搜索**: ketch（走本地 SearXNG）→ rpiv-web-tools（serper）→ curl
     - `ketch_search` — 网页搜索（SearXNG，本地隐私优先）
     - `ketch_scrape` — 抓取网页
     - `ketch_code` — 搜开源代码
