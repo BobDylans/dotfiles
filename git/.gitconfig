@@ -9,10 +9,6 @@
 	helper = !/home/ivan/.local/bin/gh auth git-credential
 [pull]
 	rebase = true
-[http]
-	proxy = http://127.0.0.1:7890
-[https]
-	proxy = http://127.0.0.1:7890
 [credential "https://e.ennenergy.cn"]
 	helper = store
 [http "https://e.ennenergy.cn"]
@@ -54,3 +50,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[http]
+	proxy = http://127.0.0.1:7890
+[https]
+	proxy = http://127.0.0.1:7890

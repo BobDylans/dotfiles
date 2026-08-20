@@ -30,15 +30,165 @@
   "extensionStatuses": {
     "placements": {
       "pi-cache-stats": "right",
-      "pi-ketch": "off",
-      "pi-speeed": "off"
+      "pi-ketch": "off"
     },
     "colorModes": {
       "pi-cache-stats": "zentui",
-      "pi-ketch": "zentui",
-      "pi-speeed": "zentui"
+      "pi-ketch": "zentui"
     }
   },
   "separator": "dot",
-  "editorModelLabel": "id"
+  "editorModelLabel": "id",
+  "icons": {
+    "mode": "nerd"
+  },
+  "components": {
+    "editor": {
+      "enabled": true,
+      "style": "minimalist",
+      "colorSource": "terminal",
+      "borderColorMode": "static",
+      "modelLabel": "name",
+      "viewportIndicators": true,
+      "styles": {
+        "opencode": {
+          "metadataFormat": "$model  $provider(  $thinking)"
+        },
+        "opencode-copy-friendly": {
+          "metadataFormat": "$model  $provider(  $thinking)"
+        },
+        "minimalist": {
+          "pathDisplay": "compact",
+          "contextFormat": "percent",
+          "contextGauge": false,
+          "showSessionName": true,
+          "showTimer": false,
+          "showCost": false,
+          "showGit": true,
+          "contextThresholds": {
+            "warning": 70,
+            "error": 90
+          }
+        }
+      }
+    },
+    "userMessages": {
+      "enabled": true,
+      "style": "labeled",
+      "colorSource": "theme",
+      "styles": {
+        "framed": {},
+        "framed-copy-friendly": {},
+        "compact": {},
+        "labeled": {}
+      }
+    },
+    "workingLine": {
+      "enabled": true,
+      "turnSummary": true,
+      "spinner": "pulse",
+      "spinnerIntervalMs": 100,
+      "animateSpinnerColor": true,
+      "textIntervalMs": 60,
+      "textAnimation": "kitt",
+      "colorSource": "terminal",
+      "messages": {
+        "custom": true,
+        "values": [
+          "Sautéing…",
+          "Cooking…",
+          "Ionizing…",
+          "Zigzagging…",
+          "Razzle-dazzling…",
+          "Photosynthesizing…",
+          "Nucleating…",
+          "Brewing…",
+          "Combobulating…",
+          "Boogieing…",
+          "Befuddling…",
+          "Alchemizing…",
+          "Conjuring…",
+          "Baking…",
+          "Simmering…",
+          "Blanching…"
+        ]
+      },
+      "segments": {
+        "tool": false,
+        "elapsed": false,
+        "thought": true,
+        "tokens": false
+      }
+    },
+    "selectorBorders": {
+      "enabled": true,
+      "style": "zentui",
+      "colorSource": "theme"
+    },
+    "footer": {
+      "style": "starship",
+      "colorSource": "theme",
+      "modelLabel": "id",
+      "styles": {
+        "starship": {
+          "format": "",
+          "responsive": true,
+          "compactFormat": "$cwd$wrap(in $session_name)$wrap(on $git_branch) $git_status$wrap$context$wrap_sep$tokens",
+          "compactMaxLines": 2,
+          "separator": "none",
+          "contextStyle": "text+gauge",
+          "contextThresholds": {
+            "warning": 70,
+            "error": 90
+          },
+          "pathDisplay": {
+            "mode": "basename",
+            "depth": 0
+          },
+          "segments": {
+            "cwd": true,
+            "sessionName": true,
+            "gitBranch": true,
+            "gitStatus": true,
+            "gitCounts": false,
+            "gitCommit": true,
+            "gitMetrics": false,
+            "runtime": false,
+            "modelInfo": false,
+            "context": true,
+            "tokens": true,
+            "cost": false,
+            "sessionDuration": true,
+            "username": false,
+            "time": true,
+            "os": true,
+            "packageVersion": true
+          },
+          "gitBranch": {
+            "maxLength": "full"
+          },
+          "gitCommit": {
+            "hashLength": 7,
+            "onlyDetached": true,
+            "showTag": true
+          },
+          "gitMetrics": {
+            "onlyNonzero": true,
+            "ignoreSubmodules": false
+          },
+          "extensionStatuses": {
+            "defaultPlacement": "right",
+            "placements": {
+              "pi-cache-stats": "off",
+              "pi-ketch": "left"
+            },
+            "colorModes": {
+              "pi-cache-stats": "zentui",
+              "pi-ketch": "zentui"
+            }
+          }
+        }
+      }
+    }
+  }
 }

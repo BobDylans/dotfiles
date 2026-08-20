@@ -62,8 +62,11 @@ function proxyOn
     set -gx HTTP_PROXY http://127.0.0.1:7890
     set -gx HTTPS_PROXY http://127.0.0.1:7890
     set -gx ALL_PROXY http://127.0.0.1:7890
-    set -gx NO_PROXY localhost,127.0.0.1,fastai.enncloud.cn,cnvpn.enn.cn
-    echo "✅ 代理已开启 (7890)"
+    set -gx NO_PROXY localhost,127.0.0.1,fastai.enncloud.cn,cnvpn.enn.cn,registry.npmmirror.com,npmmirror.com,mirrors.ustc.edu.cn,mirrors.tuna.tsinghua.edu.cn,mirrors.hit.edu.cn,repo.huaweicloud.com
+    # GitHub 显式走代理（git https 方式）
+    git config --global http.proxy http://127.0.0.1:7890
+    git config --global https.proxy http://127.0.0.1:7890
+    echo "✅ 代理已开启 (7890, GitHub→7890)"
 end
 
 function proxyOff
@@ -71,6 +74,9 @@ function proxyOff
     set -e HTTPS_PROXY
     set -e ALL_PROXY
     set -e NO_PROXY
+    # GitHub 代理同步关闭（git https 方式）
+    git config --global --unset http.proxy 2>/dev/null
+    git config --global --unset https.proxy 2>/dev/null
     echo "❌ 代理已关闭"
 end
 
