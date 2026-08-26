@@ -1,4 +1,13 @@
+# yazi opener 配置
+# 关键：run 用 %s 占位符（yazi 替换为文件路径），不是 shell 的 $@
 [opener]
+
+# 打开文件：用 nvim（%s = 文件路径）
+open = [
+	{ run = 'nvim %s', block = true, desc = "Open with nvim", for = "unix" },
+]
+
+# 编辑文件：用 nvim
 edit = [
-	{ run = 'nvim "$@"', block = true },
+	{ run = 'nvim %s', block = true, desc = "Edit with nvim", for = "unix" },
 ]

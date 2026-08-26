@@ -240,3 +240,7 @@ alias nvim-mini 'NVIM_APPNAME=nvim-mini nvim'
 
 # ─── fff 禁用 home 目录索引（避免大目录扫描消耗资源）───
 set -gx FFF_ENABLE_HOME_SCAN 0
+
+# ─── 编辑器：yazi 等工具用 $EDITOR 打开文件 ───
+set -gx EDITOR nvim
+set -gx VISUAL nvim

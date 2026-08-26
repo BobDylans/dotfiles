@@ -46,6 +46,12 @@
       "keyColor": "#8198aa",
     },
     {
+      "type": "command",
+      "key": " ├   AGE ",
+      "text": "birth_install=$(stat -c %W / 2>/dev/null || stat -f %B /); current=$(date +%s); days_difference=$(( (current - birth_install) / 86400 )); echo $days_difference days",
+      "keyColor": "#8198aa",
+    },
+    {
       "type": "title",
       "key": " └   USR ",
       "keyColor": "#8198aa",
@@ -98,6 +104,12 @@
     {
       "type": "memory",
       "key": " ├   MEM ",
+      "keyColor": "#4a5259",
+      //"outputColor": "#333b42"
+    },
+    {
+      "type": "swap",
+      "key": " ├   SWP ",
       "keyColor": "#4a5259",
       //"outputColor": "#333b42"
     },
